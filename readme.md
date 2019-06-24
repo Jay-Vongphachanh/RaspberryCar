@@ -5,3 +5,4 @@
 - Power Source (for Raspberry Pi)
 
 # Setup
+Once the Pi is powered on you will notice that the
