@@ -1,0 +1,63 @@
+So you want to run the RC Car?
+
+Make sure both batteries have enough power to run.
+
+//On your linux enviroment: RUN the follow to connect to the raspberry pi on the RC car
+    ssh ubuntu@10.108.95.102
+    username: ubuntu
+    password: ubuntu
+
+----------------------------------------|
+//RUN THIS ON BOTH your enviroment and the raspberry pi                                        
+//Go to the ROS workspace               |
+    cd ~/catkin_ws/                     |
+                                        |
+//prepare the enviroment                |
+    source devel/setup.bash             |
+                                        |
+----------------------------------------|
+
+//now here you will need to know the IP address of 
+    ifconfig
+
+//on both the raspberry pi and our linux enviromrnt 
+    cd ~/catkin_ws/ 
+    export ROS_MASTER_URI=://http:10.108.95.102:11311
+
+//RUN THIS ON ONLY raspberry pi
+    export ROS_IP=10.108.95.102
+    export ROS_HOSTNAME=10.108.95.102
+
+//RUN THIS ON ONLY your linux enviroment
+    export ROS_IP=[YOUR IP]
+    export ROS_HOSTNAME=[YOUR IP]
+
+// THE IP and the HOSTNAME should match the one of unique to that machine
+// TO check run....
+    env |grep ROS
+
+-------------
+
+// on the PI
+    cd ~/catkin_ws/
+    roslaunch simp_motor web.launch
+
+-----------
+
+//on your laptop you will need two terminals 
+// on one of the terminals 
+    roscore
+//on the other terminal
+    rosrun joy joy_node
+
+//Note if the car doesn't move open another terminal anywhere and run...
+    cd catkin_ws
+    source devel/setup.bash
+    export ROS_MASTER_URI=://http:10.108.95.102:1131
+    export ROS_IP=[IP OF DEVICE YOUR CHECKING FROM]
+    export ROS_HOSTNAME=[IP OF DEVICE YOUR CHECKING FROM]
+    rostopic echo /joy
+//If you do not see any joy stick messages your device cannot read them or does not have permission
+//ONCE THIS IS FIX THE CAR WILL RUN
+//THIS IS MY HINT GOOD LUCK!! 
+//SEND ME A MESSAGE ONCE YOU GET HERE! =)
