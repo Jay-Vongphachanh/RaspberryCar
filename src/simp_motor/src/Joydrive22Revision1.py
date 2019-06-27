@@ -27,8 +27,7 @@ if REV == 2.3:
     pwm = Adafruit_PCA9685.PCA9685(address)
     pwm.set_pwm_freq(carFreq) #CHECK THE PWM OF YOUR BOARD AND FINE TUNE THIS #
 #-------------------------------------------------------------
-
-#Our attempt to speed up the process
+#Our attempt to speed up the process 
 nos = os.system
 
 if REV == 2.2:
@@ -55,16 +54,12 @@ def setspeed23(pin, sped):
     pwm.set_pwm(pin, 0, pos)
 
 def callback(data):
-#    if data.buttons[4] == 1:
-#        maxspeed = maxspeed - 0.01
-#        print("your max speed is ",maxspeed)
-#    if data.buttons[5] == 1:
-#        maxspeed = maxspeed + 0.01
-#        print("your max speed is ", maxspeed)
 
+    # 0.15 is out stop signal and the data.axes have a range from -1 to 1
     turn = abs(0.05*data.axes[0]-0.15)
-    speed  = 0.05*data.axes[1]+0.15    
+    speed  = 0.05*data.axes[1]+0.15 
     pwm.set_pwm(8, 0, int(speed))
+    
     if speed > maxspeed:
         speed = maxspeed
     elif speed < minspeed:
@@ -73,6 +68,7 @@ def callback(data):
         speed = 0.15
         turn = 0.15
         print("You are braking !!")
+        
     if REV == 2.2:
         print("This is Motor values" , speed)
         setspeed22(12, speed)
@@ -83,8 +79,7 @@ def callback(data):
         setspeed23(8, speed)
         print("This is Motor values for 2.3" , turn)
         setspeed23(9,turn)
-#    pub.publish(twist)
-#    rate.sleep()
+
 
 def listener():
     rospy.init_node('motor_car', anonymous=True)
