@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import rospy
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float32
@@ -11,19 +11,21 @@ import json
 import time
 import Adafruit_PCA9685
 
+#---------------------------------------------------------------
+#Set your parameters max speeds forward(maxspeed) and backwards(minspeed) car freq and sensor address  
+maxspeed = 0.18
+minspeed = 0.1
+carFreq = 97.1 # CHECK YOUR BOARD AGAINST OSCILLOSCOPE AND MAKE SURE IT IS AS CLOSE TO 100Hz
+address = 0x40 # default is 0x40 
+#-------------------------------------------------------------
 #-----------------------------------------------------------------
 REV = 2.3 # select your board 
 # If your board has a PWM module built in we will need the correct chip
 if REV == 2.3:
 #    import Adafruit_PCA9685
 # Initialise the PCA9685 using the default address (0x40).
-    pwm = Adafruit_PCA9685.PCA9685(0x40)
-    pwm.set_pwm_freq(92.7)
-#-------------------------------------------------------------
-#---------------------------------------------------------------
-#Set you max speeds forward(maxspeed) and backwards(minspeed) 
-maxspeed = 0.17
-minspeed = 0.13
+    pwm = Adafruit_PCA9685.PCA9685(address)
+    pwm.set_pwm_freq(carFreq) #CHECK THE PWM OF YOUR BOARD AND FINE TUNE THIS #
 #-------------------------------------------------------------
 
 #Our attempt to speed up the process
@@ -98,6 +100,7 @@ if __name__ == '__main__':
         for i in range(0, len(cmd)):
             nos(cmd[i])
             print(cmd[i])
+    print(sys.version)
     listener()
 
 
