@@ -1,3 +1,5 @@
+## This will allow you to connect the raspberry pi to a controller that has bluetooth capabilities 
+
 https://scribles.net/creating-ble-gatt-server-uart-service-on-raspberry-pi/
 
 Install Bluez
