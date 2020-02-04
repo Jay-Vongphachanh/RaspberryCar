@@ -18,6 +18,11 @@ Terminal 3:
 ```
 rostopic echo /joy
 ```
+# Download MJPEGSTREAMER for the USB WEBCAM
+Follow the guide https://github.com/lbaitemple/mjpg-streamer
+
+
+-------------------------- EDIT THIS SECTION below
 # Python 2.7 script
 Assuming you are using a PCA9685 for the traxxas XL 2.5 ESC 
 <br \> This code will read the joystick controller and images from your camera and export them into an CSV format there are files that are needed to run this code... more documentation on that coming soon...
